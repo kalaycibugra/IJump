@@ -27,10 +27,10 @@ public class GameView extends View {
     int manX,manY;
     Bitmap [] man;
     int [] block_loc;
-    Bitmap cloud1,cloud2;
+    Bitmap cloud1,cloud2,cloud3;
     Bitmap block;
     int manFrame = 0;
-    int velocity=0,gravity=7,block_vel=13;
+    int velocity=0,gravity=8,block_vel=15;
     int cloud_vel=0;
     Random rand = new Random();
     public GameView(Context context) {
@@ -58,11 +58,13 @@ public class GameView extends View {
         block_loc[1]=dWidth/2+300;
         block_loc[2]=dWidth/2-100;
         cloud1=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
-        cloud2=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
-        man[0]=BitmapFactory.decodeResource(getResources(),R.drawable.rob);
-        man[1]=BitmapFactory.decodeResource(getResources(),R.drawable.rob1);
+//        cloud2=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
+//        cloud3=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
 
-        man[2]=BitmapFactory.decodeResource(getResources(),R.drawable.rob2);
+        man[0]=BitmapFactory.decodeResource(getResources(),R.drawable.rob5);
+        man[1]=BitmapFactory.decodeResource(getResources(),R.drawable.rob6);
+
+        man[2]=BitmapFactory.decodeResource(getResources(),R.drawable.rob7);
         manX= dWidth/2-man[0].getWidth()/2;
         manY=dHeight-man[0].getHeight()/2-300;
         cloud_vel=dWidth-1;
@@ -81,11 +83,12 @@ public class GameView extends View {
             }
         }
         canvas.drawBitmap(background,null,rect,null);
-        canvas.drawBitmap(block,block_loc[0],dHeight-180,null);
-        canvas.drawBitmap(block,block_loc[1],dHeight-180,null);
-        canvas.drawBitmap(block,block_loc[2],dHeight-180,null);
+        canvas.drawBitmap(block,block_loc[0],dHeight-250,null);
+        canvas.drawBitmap(block,block_loc[1],dHeight-250,null);
+        canvas.drawBitmap(block,block_loc[2],dHeight-250,null);
         canvas.drawBitmap(cloud1,cloud_vel,200,null);
         canvas.drawBitmap(cloud1,cloud_vel-400,100,null);
+        canvas.drawBitmap(cloud1,cloud_vel-1000,300,null);
         if(manFrame==0){
             manFrame=1;
         }
@@ -117,7 +120,7 @@ public class GameView extends View {
         int action = event.getAction();
         if(action==MotionEvent.ACTION_DOWN){
 //            cloud_vel=cloud_vel-20;
-            velocity=-50;
+            velocity=-70;
 
 //            block_vel=-30;
         }
