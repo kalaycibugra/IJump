@@ -17,7 +17,6 @@ import java.util.Random;
 
 public class GameView extends View {
     Handler handler;
-    Handler handler2;
     Runnable runnable;
     final int UPDATE_MILLIS=50;
     Bitmap background;
@@ -28,7 +27,7 @@ public class GameView extends View {
     int manX,manY;
     Bitmap [] man;
     int [] block_loc;
-    Bitmap cloud;
+    Bitmap cloud1,cloud2;
     Bitmap block;
     int manFrame = 0;
     int velocity=0,gravity=7,block_vel=13;
@@ -58,8 +57,8 @@ public class GameView extends View {
         block_loc[0]=dWidth/2+100;
         block_loc[1]=dWidth/2+300;
         block_loc[2]=dWidth/2-100;
-        cloud=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
-
+        cloud1=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
+        cloud2=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
         man[0]=BitmapFactory.decodeResource(getResources(),R.drawable.as);
         man[1]=BitmapFactory.decodeResource(getResources(),R.drawable.asdd);
         manX= dWidth/2-man[0].getWidth()/2;
@@ -80,10 +79,11 @@ public class GameView extends View {
             }
         }
         canvas.drawBitmap(background,null,rect,null);
-        canvas.drawBitmap(block,block_loc[0],dHeight-350,null);
-        canvas.drawBitmap(block,block_loc[1],dHeight-350,null);
-        canvas.drawBitmap(block,block_loc[2],dHeight-350,null);
-        canvas.drawBitmap(cloud,cloud_vel,200,null);
+        canvas.drawBitmap(block,block_loc[0],dHeight-180,null);
+        canvas.drawBitmap(block,block_loc[1],dHeight-180,null);
+        canvas.drawBitmap(block,block_loc[2],dHeight-180,null);
+        canvas.drawBitmap(cloud1,cloud_vel,200,null);
+        canvas.drawBitmap(cloud1,cloud_vel-400,100,null);
         if(manFrame==0){
             manFrame=1;
         }
@@ -91,13 +91,14 @@ public class GameView extends View {
             manFrame=0;
         }
 
-        if(manY<dHeight-man[0].getHeight()-300 || velocity < 0){
+        if(manY<=dHeight-man[0].getHeight()-150 || velocity < 0){
             velocity+=gravity;
             manY+=velocity;
 
         }
+
         if(cloud_vel>0){
-            cloud_vel-=1;
+            cloud_vel-=block_vel;
         }
         else{
             cloud_vel=dWidth-1;
@@ -110,7 +111,7 @@ public class GameView extends View {
     public boolean onTouchEvent(MotionEvent event){
         int action = event.getAction();
         if(action==MotionEvent.ACTION_DOWN){
-            cloud_vel=cloud_vel-10;
+//            cloud_vel=cloud_vel-20;
             velocity=-50;
 
 //            block_vel=-30;

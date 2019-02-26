@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StartGame">
+        <activity android:name=".StartGame" android:screenOrientation="landscape">
 
         </activity>
     </application>
