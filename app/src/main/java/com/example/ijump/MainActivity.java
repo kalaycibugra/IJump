@@ -12,13 +12,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button button1 = findViewById(R.id.start);
-        button1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                Intent nextPage = new Intent(MainActivity.this,Game.class);
-                startActivity(nextPage);
-            }
-        });
+
+    }
+    public void Game(View view){
+        Intent intent = new Intent(this,StartGame.class);
+        startActivity(intent);
+        finish();
     }
 }
