@@ -52,15 +52,17 @@ public class GameView extends View {
         dHeight=point.y;
         dWidth=point.x;
         rect = new Rect(0,0,dWidth,dHeight);
-        man = new Bitmap[2];
+        man = new Bitmap[3];
         block_loc = new int[3];
         block_loc[0]=dWidth/2+100;
         block_loc[1]=dWidth/2+300;
         block_loc[2]=dWidth/2-100;
         cloud1=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
         cloud2=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
-        man[0]=BitmapFactory.decodeResource(getResources(),R.drawable.as);
-        man[1]=BitmapFactory.decodeResource(getResources(),R.drawable.asdd);
+        man[0]=BitmapFactory.decodeResource(getResources(),R.drawable.rob);
+        man[1]=BitmapFactory.decodeResource(getResources(),R.drawable.rob1);
+
+        man[2]=BitmapFactory.decodeResource(getResources(),R.drawable.rob2);
         manX= dWidth/2-man[0].getWidth()/2;
         manY=dHeight-man[0].getHeight()/2-300;
         cloud_vel=dWidth-1;
@@ -86,6 +88,9 @@ public class GameView extends View {
         canvas.drawBitmap(cloud1,cloud_vel-400,100,null);
         if(manFrame==0){
             manFrame=1;
+        }
+        else if(manFrame==1){
+            manFrame=2;
         }
         else{
             manFrame=0;
