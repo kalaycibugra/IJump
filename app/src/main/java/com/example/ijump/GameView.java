@@ -29,8 +29,9 @@ public class GameView extends View {
     int [] block_loc;
     Bitmap cloud1,cloud2,cloud3;
     Bitmap block;
+    int [] block_h;
     int manFrame = 0;
-    int velocity=0,gravity=8,block_vel=15;
+    int velocity=0,gravity=8,block_vel=18;
     int cloud_vel=0;
     Random rand = new Random();
     public GameView(Context context) {
@@ -54,9 +55,14 @@ public class GameView extends View {
         rect = new Rect(0,0,dWidth,dHeight);
         man = new Bitmap[3];
         block_loc = new int[3];
-        block_loc[0]=dWidth/2+100;
-        block_loc[1]=dWidth/2+300;
-        block_loc[2]=dWidth/2-100;
+        block_h = new int[3];
+//        block_loc[0]=dWidth-rand.nextInt(dWidth);
+//        block_loc[1]=dWidth-rand.nextInt(dWidth);
+//        block_loc[2]=dWidth-rand.nextInt(dWidth);
+        for(int i=0;i<3;i++) {
+            block_loc[i] = dWidth - rand.nextInt(dWidth);
+            block_h[i] = dHeight - rand.nextInt(dHeight);
+        }
         cloud1=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
 //        cloud2=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
 //        cloud3=BitmapFactory.decodeResource(getResources(),R.drawable.cloud);
@@ -66,7 +72,7 @@ public class GameView extends View {
 
         man[2]=BitmapFactory.decodeResource(getResources(),R.drawable.rob7);
         manX= dWidth/2-man[0].getWidth()/2;
-        manY=dHeight-man[0].getHeight()/2-300;
+        manY=dHeight-man[0].getHeight()-man[0].getHeight()/2;
         cloud_vel=dWidth-1;
 
 
@@ -76,19 +82,22 @@ public class GameView extends View {
         super.onDraw(canvas);
 
         for(int i=0;i<3;i++){
+
             block_loc[i]=block_loc[i]-block_vel;
             if(block_loc[i]<=0){
                 int num=rand.nextInt(100);
+
                 block_loc[i]=dWidth-num;
-            }
+                block_h[i]=dHeight-rand.nextInt(dHeight)-block.getHeight();            }
         }
         canvas.drawBitmap(background,null,rect,null);
-        canvas.drawBitmap(block,block_loc[0],dHeight-250,null);
-        canvas.drawBitmap(block,block_loc[1],dHeight-250,null);
-        canvas.drawBitmap(block,block_loc[2],dHeight-250,null);
+        int num1=rand.nextInt(4);
         canvas.drawBitmap(cloud1,cloud_vel,200,null);
         canvas.drawBitmap(cloud1,cloud_vel-400,100,null);
         canvas.drawBitmap(cloud1,cloud_vel-1000,300,null);
+        canvas.drawBitmap(block,block_loc[0],block_h[0],null);
+        canvas.drawBitmap(block,block_loc[1],block_h[1],null);
+        canvas.drawBitmap(block,block_loc[2],block_h[2],null);
         if(manFrame==0){
             manFrame=1;
         }
@@ -99,7 +108,7 @@ public class GameView extends View {
             manFrame=0;
         }
 
-        if(manY<=dHeight-man[0].getHeight()-150 || velocity < 0){
+        if(manY<=dHeight-man[0].getHeight()-man[0].getHeight()/2 || velocity < 0){
             velocity+=gravity;
             manY+=velocity;
 
