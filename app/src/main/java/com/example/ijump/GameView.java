@@ -45,9 +45,7 @@ public class GameView extends View {
 
         super(context);
 //    init();
-        paint2= new Paint();
-        paint2.setColor(Color.BLACK);
-        paint2.setTextSize(20);
+
         handler=new Handler();
         runnable=new Runnable() {
             @Override
@@ -98,9 +96,9 @@ public class GameView extends View {
             block_loc[i]=block_loc[i]-block_vel;
             if(block_loc[i]<=0){
                 int num=rand.nextInt(100);
-
+                int num1=rand.nextInt(dHeight-200)+300;
                 block_loc[i]=dWidth-num;
-                block_h[i]=dHeight-rand.nextInt(dHeight-200)-200;
+                block_h[i]=dHeight-num1;
                 check[i]=false;
             }
             if(manX<=block_loc[i]&&block_loc[i]<=manX+man[0].getWidth())
@@ -126,7 +124,7 @@ public class GameView extends View {
         canvas.drawBitmap(cloud1,cloud_vel,200,null);
         canvas.drawBitmap(cloud1,cloud_vel-400,100,null);
         canvas.drawBitmap(cloud1,cloud_vel-1000,300,null);
-        
+
         for(int i=0;i<3;i++){
             if(check[i]==false)
                 canvas.drawBitmap(block,block_loc[i],block_h[i],null);
@@ -142,7 +140,7 @@ public class GameView extends View {
             manFrame=0;
         }
 
-        if(manY<=dHeight-man[0].getHeight() || velocity < 0){
+        if(manY<=dHeight-man[0].getHeight()-man[0].getHeight()/2 || velocity < 0){
             velocity+=gravity;
             manY+=velocity;
 
